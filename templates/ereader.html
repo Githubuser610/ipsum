@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block page %}
+
+<div id='tool-bar' class="fixed-hovering-bar tool-bar shadow unselectable">
+    <button class="tool-bar-utility" id="back-button">Back</button>
+    <button class="tool-bar-utility" id="print-utility">Print</button>
+    <button class="tool-bar-utility" id="highlight-utility">Highlight</button>
+    <button class="tool-bar-utility" id="unhighlight-utility">Remove</button>
+    <button id="annotation-utility" class="tool-bar-utility">Annotate</button>
+    <button id='save-utility' class="tool-bar-utility">Save</button>
+</div>
+
+<div class="book-title">
+    <h1>{{ title }}</h1>
+</div>
+
+<div class="book-reader unselectable">
+    <div class="unrendered-text hide">{{ text }}</div>
+</div>
+
+{% endblock %}

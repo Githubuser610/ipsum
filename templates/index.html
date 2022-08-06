@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block page %}
+<div id = "index-html" class="index-container">
+    <div class="index-nav-bar shadow">
+        <button class="nav-bar-menu icon-button disabled">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-bar-searchbar">
+            <button class="nav-bar-searchbar-icon icon-button">
+                <i class="fas fa-search"></i>
+            </button>
+            <input type="text" placeholder="Search" id="nav-bar-searchbar-input">
+        </div>
+        <div class="nav-bar-icons">
+            <button class="nav-bar-icons-settings icon-button">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button class="nav-bar-icons-profile icon-button">
+                <img alt="profile picture" class="profile-picture" src="/get_pfp">
+            </button>
+
+            <div class="nav-bar-profile container-vertical shadow">
+                <div class="nav-bar-profile-header container-vertical">
+                    <img alt="profile picture" class="profile-picture" src="/get_pfp">
+                    <h2 class='profile-name'>{{ firstName }} {{ lastName }}</h2>
+                </div>
+                <div class="nav-bar-profile-body container">
+                    <a class="link-to-button" href="/logout">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="index-body">
+        <section id="upload" class="index-body-section">
+            <h1 class="section-header">Upload</h1>
+            <p class="section-desc">Upload a text, epub or pdf book</p>
+            <form action="/uploader" method="post", enctype="multipart/form-data">
+                <label for='book-upload'>Book</label>
+                <input id='book-upload' type="file" name="book-upload" required>
+
+                <label for='pic-upload'>Book cover (optional)</label>
+                <input id='pic-upload' type="file" name="pic-upload">
+
+                <input type="text" name="bookTitle" placeholder="Title of book" required>
+                <input type="submit">
+            </form>
+        </section>
+        <section id="books" class="index-body-section">
+            <h1 class="section-header">My Books</h1>
+            <div id='none-found' class='container-horizontal hide'><h2>No books found.</h2></div>
+            {% if rows %}
+            <div class="index-body-books">
+
+                {% for row in rows %} 
+                    <div class="book container-vertical" data-book-id="{{row['book_id']}}">
+
+                        {% if row['pic_filepath'] %}
+                            <img src="/getimage?q={{row['book_id']}}" alt='book-cover'>
+                            <div class='book-info container-horizontal fl-j-spacebetween'>
+                                <h2 class="book-title-preview">{{row['title']}}</h2>
+                                <div class="book-setting">
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                            </div>
+                        {% else %}
+                            <h2 class="book-title-main">{{row['title']}}</h2>
+                            <div class='book-info container-horizontal fl-j-spacebetween'>
+                                <h2 class="book-title-preview">{{row['title']}}</h2>
+                                <div class="book-setting">
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+
+            </div>
+            {% else %} 
+            <div id='no-uploads' class='container-horizontal'><h2>You have no books yet.</h2></div>
+            <div class="index-body-books"></div>
+            {% endif %}
+            
+        </section>
+    </div>
+</div>
+{% endblock %}

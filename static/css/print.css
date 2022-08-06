@@ -1,0 +1,81 @@
+.book-title {
+    display: none;
+}
+
+#tool-bar {
+    display: none;
+}
+
+.book-page {
+    page-break-after: always;
+    break-inside: avoid;
+}
+
+.book-reader {
+    display: block !important;
+    margin: 0;
+}
+
+@media (orientation: portrait) {
+    .book-page {
+        top: 15vh;
+    }
+
+    .book-page:nth-child(odd) {
+        left: 50vw;
+    }
+
+    .book-page:nth-child(odd) .annotation {
+        left: -65%;
+    }
+}
+
+@media (orientation: landscape) {
+    
+    /* not available in safari */
+    @page {
+        margin: auto 10%;
+    }
+
+    .book-page {
+        height: 187mm;
+    }
+
+    .book-page:nth-child(odd) {
+        left: 50vw;
+    }
+
+    .annotation {
+        width: 30vw;
+    }
+
+    .book-page:nth-child(odd) .annotation {
+        left: -75%;
+    }
+
+    .book-page:nth-child(odd) .annotation::before {
+        content: '';
+        position: absolute;
+        width: 30%;
+        height: 2px;
+        background-color: grey;
+        right: -30%;
+        top: 20px;
+    }
+
+    .book-page:nth-child(even) .annotation {
+        left: 120%;
+    }
+
+    .book-page:nth-child(even) .annotation::before {
+        content: '';
+        position: absolute;
+        width: 30%;
+        height: 2px;
+        background-color: grey;
+        left: -30%;
+        top: 20px;
+    }
+}
+
+

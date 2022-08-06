@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ipsum {% block title %}{% endblock %}</title>
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" media="print" href="{{ url_for('static', filename='css/print.css') }}">
+
+    <!-- js -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/7b3183463c.js" crossorigin="anonymous"></script>
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+
+    <!-- jquery -->
+    <script src="{{ url_for('static', filename='js/lib/jquery-3.6.0.min.js') }}"></script>
+</head>
+<body>
+    {% if get_flashed_messages() %}
+    {% with success = get_flashed_messages(category_filter=["success"]) %}
+    {% if success %}
+    <div class="alert-message container-horizontal fixed-hovering-bar success animate-alert">
+        <ul>
+            {%- for msg in success %}
+            <li>{{ msg }}</li>
+            {% endfor -%}
+        </ul>
+        <button class="close"><i class="fas fa-times"></i></button>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+
+    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+    {% if errors %}
+    <div class="alert-message container-horizontal fixed-hovering-bar alert-message-error animate-alert">
+        <ul>
+            {%- for msg in errors %}
+            <li>{{ msg }}</li>
+            {% endfor -%}
+        </ul>
+        <button class="close"><i class="fas fa-times"></i></button>
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% endif %}
+
+    {% block page %}{% endblock %}
+</body>
+</html>

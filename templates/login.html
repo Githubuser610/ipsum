@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block page %}
+<div id="login-html" class="login-container" style="background: url( {{ url_for('static', filename = 'img/login-books.jpg') }} );">
+    <div class="login-background-filter">
+        <figure class="login-quote">
+            <blockquote cite="#">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, cumque.</p>
+            </blockquote>
+            <figcaption>- Lorem, ipsum dolor</figcaption>
+        </figure>
+        <div class="login-bar">
+            <div class="login-bar-brand brand">
+                <span>~ ipsum</span>             
+            </div>
+            <div class="login-bar-body">
+                <div class="login-bar-forms">
+                    <form class="login-form" action="/login" method="POST">
+                        <input class="login-form-input form-input blue" type="email" placeholder="Email address" autofocus="on" name="email" required>
+                        <input class="form-input blue login-form-input" type="password" placeholder="Password" name="password" required>
+                        <button type="submit">Log In</button>
+                    </form>
+                    <div class="login-bar-divider">
+                        <div class="linebreak"></div>
+                        <span>or</span>
+                        <div class="linebreak"></div>
+                    </div>
+                    <button class="registration-button" id="registration-button-id">Create New Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
